@@ -9,6 +9,7 @@ import pandas as pd
 from im2mesh import config
 from im2mesh.checkpoints import CheckpointIO
 from im2mesh.utils.io import export_pointcloud
+import sys
 
 
 parser = argparse.ArgumentParser(
@@ -17,6 +18,9 @@ parser = argparse.ArgumentParser(
 parser.add_argument('config', type=str, help='Path to config file.')
 parser.add_argument('--no-cuda', action='store_true', help='Do not use cuda.')
 
+sys.argv = [r"generate.py",
+            "configs/demo.yaml"
+            ]
 args = parser.parse_args()
 cfg = config.load_config(args.config, 'configs/default.yaml')
 is_cuda = (torch.cuda.is_available() and not args.no_cuda)
@@ -52,7 +56,7 @@ generate_pointcloud = cfg['generation']['generate_pointcloud']
 # Loader
 torch.manual_seed(cfg['generation']['rand_seed'])
 test_loader = torch.utils.data.DataLoader(
-    dataset, batch_size=1, num_workers=1,
+    dataset, batch_size=1, num_workers=0,
     shuffle=cfg['generation']['shuffle_generation'])
 
 # Statistics

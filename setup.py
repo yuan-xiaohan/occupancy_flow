@@ -44,7 +44,7 @@ triangle_hash_module = Extension(
     sources=[
         'im2mesh/utils/libmesh/triangle_hash.pyx'
     ],
-    libraries=['m'],  # Unix-like specific
+    # libraries=['m'],  # Unix-like specific
     include_dirs=[numpy_include_dir]
 )
 
@@ -72,7 +72,7 @@ voxelize_module = Extension(
     sources=[
         'im2mesh/utils/libvoxelize/voxelize.pyx'
     ],
-    libraries=['m'],  # Unix-like specific
+    # libraries=['m'],  # Unix-like specific
     include_dirs=[numpy_include_dir]
 )
 
